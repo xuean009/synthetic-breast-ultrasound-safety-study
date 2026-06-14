@@ -1,0 +1,17 @@
+cff-version: 1.2.0
+message: "If you use these synthetic images or code, cite the dataset DOI and associated article."
+title: "Synthetic breast ultrasound images for privacy conscious medical AI research"
+type: dataset
+authors:
+  - family-names: Zhang
+    given-names: Zhenqi
+  - family-names: Zhuang
+    given-names: Min
+  - family-names: Lu
+    given-names: Man
+  - family-names: Wang
+    given-names: Lu
+doi: "ZENODO_DOI_PENDING"
+repository-code: "https://github.com/xuean009/synthetic-breast-ultrasound-safety-study"
+license: CC-BY-4.0
+
