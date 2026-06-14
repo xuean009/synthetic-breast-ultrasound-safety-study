@@ -2,8 +2,8 @@
 """Run the fixed authenticity prompt through an OpenAI-compatible endpoint.
 
 Credentials and endpoint details are read only from environment variables:
-AI_API_KEY, AI_API_URL, and AI_MODEL. No non-prompt generation parameter is
-sent, so the provider defaults are retained.
+AI_API_KEY, AI_API_URL, and AI_MODEL. The request reproduces the historical
+settings: temperature 0, max_tokens 512, and high image detail.
 """
 
 from __future__ import annotations
@@ -56,11 +56,19 @@ def classify(
             {
                 "role": "user",
                 "content": [
-                    {"type": "image_url", "image_url": {"url": data_url(image_path)}},
+                    {
+                        "type": "image_url",
+                        "image_url": {
+                            "url": data_url(image_path),
+                            "detail": "high",
+                        },
+                    },
                     {"type": "text", "text": user_prompt},
                 ],
             },
         ],
+        "temperature": 0,
+        "max_tokens": 512,
     }
     response = session.post(api_url, json=payload, timeout=180)
     response.raise_for_status()
@@ -115,4 +123,3 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
-

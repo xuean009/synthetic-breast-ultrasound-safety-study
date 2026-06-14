@@ -68,6 +68,22 @@ def main() -> None:
         failures.append("Official Nano Banana Pro endpoint is missing")
     if "GEMINI_API_KEY" not in generation_text:
         failures.append("Generation script does not use GEMINI_API_KEY")
+    data_card_text = (root / "DATA_CARD.md").read_text(encoding="utf-8")
+    if not (
+        "separate reference harness" in data_card_text
+        and "historical" in data_card_text
+    ):
+        failures.append("Data card does not distinguish the reference harness")
+    if "official API defaults were used" in data_card_text:
+        failures.append("Data card retains an unsupported default-parameter claim")
+    classifier_text = (
+        root / "code" / "classify_authenticity.py"
+    ).read_text(encoding="utf-8")
+    for required_setting in ('"temperature": 0', '"max_tokens": 512', '"detail": "high"'):
+        if required_setting not in classifier_text:
+            failures.append(
+                f"Historical classifier setting is missing: {required_setting}"
+            )
 
     if failures:
         print("\n".join(f"FAIL: {item}" for item in failures))

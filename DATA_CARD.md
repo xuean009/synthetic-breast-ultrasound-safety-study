@@ -11,17 +11,21 @@ acquisition.
 ## Dataset
 
 The release contains 300 text-generated, single-view breast ultrasound-style
-images. Each image has a prespecified BI-RADS generation target, exact prompt,
+images. Each image has a prespecified BI-RADS generation target, base prompt,
 file size, and SHA-256 checksum.
 
-The images were generated with Gemini 3 Pro Image (Nano Banana Pro). No study
-patient image was supplied as a generation input. Apart from prompt content,
-the official API defaults were used. The API call dates remain to be reported
-in the associated article.
+The images were generated between 26 and 30 April 2026 with Nano Banana Pro
+through an asynchronous image-generation gateway (gateway model designation
+`Nano_Banana_2_2K_0`). No study patient image was supplied as a generation
+input. Historical requests supplied the base prompt, an appended 16:9
+aspect-ratio instruction and JPEG output. No seed or temperature parameter was
+supplied.
 
-The public reference harness targets Google's official Gemini API endpoint and
-the `gemini-3-pro-image` model. Regeneration is stochastic and is not expected
-to reproduce the deposited file hashes.
+The public Google Gemini script is a separate reference harness requested for
+future regeneration experiments. It targets Google's official Gemini API
+endpoint and the `gemini-3-pro-image` model, but it is not the historical
+gateway used to create the deposited files. Regeneration is stochastic and is
+not expected to reproduce the deposited file hashes.
 
 ## Intended use
 

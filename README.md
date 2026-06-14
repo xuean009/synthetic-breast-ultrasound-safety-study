@@ -16,15 +16,17 @@ The 300 synthetic images are distributed through Zenodo rather than GitHub.
 
 ## Repository contents
 
-- `prompts/generation_prompts.csv`: exact prompt for each synthetic image.
+- `prompts/generation_prompts.csv`: base prompt for each synthetic image; the
+  historical request appended a 16:9 aspect-ratio instruction.
 - `prompts/authenticity_prompts.txt`: fixed Phase 2 and Phase 3 AI prompts.
 - `metadata/synthetic_image_manifest.csv`: BI-RADS generation targets, file
   sizes, and SHA-256 hashes for all 300 images.
 - `metadata/sha256sums.txt`: checksums in standard text format.
-- `code/generate_images_gemini.py`: reference regeneration harness using the
-  official Google Gemini API endpoint for Nano Banana Pro.
+- `code/generate_images_gemini.py`: separate reference regeneration harness
+  using the official Google Gemini API endpoint for Nano Banana Pro.
 - `code/package_synthetic_dataset.py`: package and validate the image archive.
-- `code/classify_authenticity.py`: credential-free reference inference harness.
+- `code/classify_authenticity.py`: environment-configured authenticity
+  inference harness reproducing the historical request settings.
 - `code/validate_public_repository.py`: privacy and integrity checks.
 
 Authentic clinical images, original survey files, reader-level data,
@@ -43,7 +45,12 @@ python code/package_synthetic_dataset.py verify \
 
 ## Reference generation call
 
-The reference generation harness uses Google's official Gemini API:
+The deposited images were generated between 26 and 30 April 2026 through an
+asynchronous gateway using model designation `Nano_Banana_2_2K_0`. Historical
+requests supplied the base prompt, an appended 16:9 aspect-ratio instruction
+and JPEG output. No study-patient image was supplied.
+
+The separate reference harness uses Google's official Gemini API:
 
 ```text
 https://generativelanguage.googleapis.com/v1/models/gemini-3-pro-image:generateContent
@@ -57,9 +64,17 @@ python code/generate_images_gemini.py \
   --output-dir regenerated_images
 ```
 
-Only prompt content is sent in addition to the model identifier, retaining the
-official API defaults. Image generation is stochastic, so regenerated files
-are not expected to reproduce the deposited file hashes.
+The reference harness sends only prompt content in addition to the model
+identifier. It does not reproduce the historical gateway request and is not
+expected to reproduce the deposited file hashes.
+
+## AI authenticity request
+
+The historical Phase 2 and Phase 3 model calls used an OpenAI-compatible
+gateway with model identifier `gpt-5.5` on 29 May and 10 June 2026,
+respectively. Requests set `temperature=0`, `max_tokens=512` and image detail
+to `high`. The public classifier reads its endpoint and credentials from
+environment variables.
 
 ## Label interpretation
 
