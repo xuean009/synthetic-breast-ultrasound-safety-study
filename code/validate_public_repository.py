@@ -58,9 +58,22 @@ def main() -> None:
     if failures:
         print("\n".join(f"FAIL: {item}" for item in failures))
         raise SystemExit(1)
+    generation_script = root / "code" / "generate_images_gemini.py"
+    generation_text = generation_script.read_text(encoding="utf-8")
+    expected_endpoint = (
+        "https://generativelanguage.googleapis.com/v1/models/"
+        "gemini-3-pro-image:generateContent"
+    )
+    if expected_endpoint not in generation_text:
+        failures.append("Official Nano Banana Pro endpoint is missing")
+    if "GEMINI_API_KEY" not in generation_text:
+        failures.append("Generation script does not use GEMINI_API_KEY")
+
+    if failures:
+        print("\n".join(f"FAIL: {item}" for item in failures))
+        raise SystemExit(1)
     print(f"PASS: {len(files)} files checked; 300 synthetic records validated.")
 
 
 if __name__ == "__main__":
     main()
-

@@ -19,6 +19,10 @@ patient image was supplied as a generation input. Apart from prompt content,
 the official API defaults were used. The API call dates remain to be reported
 in the associated article.
 
+The public reference harness targets Google's official Gemini API endpoint and
+the `gemini-3-pro-image` model. Regeneration is stochastic and is not expected
+to reproduce the deposited file hashes.
+
 ## Intended use
 
 - Synthetic-image fidelity and provenance research.
@@ -50,4 +54,3 @@ recommended citation and reporting requirements.
 ## License
 
 Creative Commons Attribution 4.0 International (CC BY 4.0).
-
