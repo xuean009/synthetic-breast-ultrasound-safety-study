@@ -10,8 +10,8 @@ of the study:
 
 The 300 synthetic images are distributed through Zenodo rather than GitHub.
 
-- Dataset DOI: `ZENODO_DOI_PENDING`
-- Dataset record: `ZENODO_URL_PENDING`
+- Dataset DOI: [`10.5281/zenodo.20684589`](https://doi.org/10.5281/zenodo.20684589)
+- Dataset draft record: https://zenodo.org/deposit/20684589
 - License: CC BY 4.0
 
 ## Repository contents

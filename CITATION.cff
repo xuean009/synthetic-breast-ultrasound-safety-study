@@ -11,7 +11,6 @@ authors:
     given-names: Man
   - family-names: Wang
     given-names: Lu
-doi: "ZENODO_DOI_PENDING"
+doi: "10.5281/zenodo.20684589"
 repository-code: "https://github.com/xuean009/synthetic-breast-ultrasound-safety-study"
 license: CC-BY-4.0
-
